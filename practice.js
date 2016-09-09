@@ -3,17 +3,24 @@
 
       //Answer
 
+      // The this keyword indicates what something should point to as the executor of a function.
+
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
       //Answer
+      // Implicit, Explicit, Default, and newBind
 
   // 3) What is the difference between call and apply?
 
       //Answer
 
+      //the .call method takes arguments individually provided upon calling, separated by commas. The .apply method can take in an array of arguments rather than each individual argument having to be written out on calling.
+
   // 4) What does .bind do?
 
       //Answer
+
+      // The .bind method binds a specific "this" value to a function in a (mostly) permanent way.
 
 
 //Next Problem
@@ -25,13 +32,33 @@
 
     //Code Here
 
+    var user = {
+      username: "jbudge3",
+      email: "jake.budge@me.com",
+      getUsername: function() {
+        return this.username;
+      }
+    }
+
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
 
+user.getUsername();
 
 //Next Problem
 
 
 // Write the function definitions which will make the following function invocations function properly.
+
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.move = 0;
+  this.moveCar = function() {
+    return this.move = this.move + 10;
+  }
+}
+
 
   //Function Invocations Here
 
@@ -56,6 +83,12 @@ var getYear = function(){
 //Note(no tests)
   //Code Here
 
+var priusYear = getYear.call(prius);
+var mustangYear = getYear.call(mustang);
+
+console.log(priusYear);
+console.log(mustangYear);
+
 
 //New Problem
 
@@ -69,7 +102,7 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+var userName = getMyUsername.call(myUser); //Fix this
 
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 //Note(no tests)
@@ -78,5 +111,7 @@ var userName = getMyUsername(); //Fix this
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
   //Answer Here
+
+  // Before, it was bound to the window. After I fixed it, it got bound to the myUser object.
 
 //Fix the getMyUsername invocation so that userName will be equal to 'iliketurtles'.
